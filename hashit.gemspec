@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Hashit::VERSION
   spec.authors       = ["Nitzan Blankleder","Gabriel Manricks"]
   spec.email         = ["nitzanblanko@gmail.com"]
-  spec.summary       = %q{}
-  spec.homepage      = ""
+  spec.summary       = "Wrapper for Ruby's hashing functions"
+  spec.homepage      = "https://github.com/nitzanbl/Hashit"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
