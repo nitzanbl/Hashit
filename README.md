@@ -1,5 +1,7 @@
 # Hashit
 
+[![Gem Version](https://badge.fury.io/rb/hashit.svg)](http://badge.fury.io/rb/hashit)
+
 Wrapper for Ruby's hashing functions
 
 ## Installation
