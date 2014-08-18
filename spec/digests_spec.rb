@@ -10,7 +10,7 @@ describe "Hashit Digests" do
   it 'generates a hash from a key and text' do
     key = "Key"
     text = "Some Text"
-    hash = "sha256|cd904d6df2122eddf1d6df1240730d29056c171539f171a57ada2a16f5a54bf0"
+    hash = "r6|cd904d6df2122eddf1d6df1240730d29056c171539f171a57ada2a16f5a54bf0"
 
     expect(Hashit.sha256 key, text).to be == hash
   end
@@ -18,7 +18,7 @@ describe "Hashit Digests" do
   it 'generates a hash from an array of strings' do
     key = "key"
     text = %w[nitzan gabriel]
-    hash = "sha256|08665f6532b0b28c1298955e2db2558a7ef06624708ac6cba6e73e88e0351b7d"
+    hash = "r6|08665f6532b0b28c1298955e2db2558a7ef06624708ac6cba6e73e88e0351b7d"
 
     expect(Hashit.sha256 key, text).to be == hash
   end
@@ -26,7 +26,7 @@ describe "Hashit Digests" do
   it 'generates a recursive hash from an array of keys' do
     key = %w[ron vivi]
     text = "text"
-    hash = "sha256|54b11c895b426b527bc8c7029b3064d9b48dace3359b143268dac21d472def9c"
+    hash = "r6|54b11c895b426b527bc8c7029b3064d9b48dace3359b143268dac21d472def9c"
 
     expect(Hashit.sha256 key, text).to be == hash
   end
@@ -34,7 +34,7 @@ describe "Hashit Digests" do
   it 'converts parameters to strings' do
     key = 32
     text = 45
-    hash="sha256|ef4f59fe5e91a86be6720d34a0b3413b1119638e271bcc4d2c24dbb7ef6a4bba"
+    hash="r6|ef4f59fe5e91a86be6720d34a0b3413b1119638e271bcc4d2c24dbb7ef6a4bba"
 
     expect(Hashit.sha256 key, text).to be == hash
   end
@@ -49,17 +49,19 @@ describe "Hashit Digests" do
   it 'generates a timed hash' do
     key = "key"
     text = "some text"
-    hash = "timed_#{Hashit.sha256([key, Hashit.current_time], text)}"
+    allow(Hashit).to receive(:current_time).and_return(1408350600)
+    hash = Hashit.sha256([key, 1408350600], text)
 
-    expect(Hashit.timed_sha256 key, text).to be == hash
+    expect(Hashit.timed_sha256(key, text)[1..-1]).to be == hash[1..-1]
   end
 
   it 'generates a previous timed hash' do
     key = "key"
     text = "some text"
-    hash = "timed_#{Hashit.sha256([key, Hashit.last_time], text)}"
+    allow(Hashit).to receive(:current_time).and_return(1408350600)
+    hash = Hashit.sha256([key, 1408348800], text)
 
-    expect(Hashit.previous_sha256 key, text).to be == hash
+    expect(Hashit.previous_sha256(key, text)[1..-1]).to be == hash[1..-1]
   end
 
 end

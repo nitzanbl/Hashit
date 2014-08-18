@@ -1,6 +1,6 @@
 require "hashit/digests"
-require "hashit/verifier"
 
 module Hashit
-  VERSION = "0.0.2"
+  VERSION = "0.0.3"
+  extend Digests
 end
