@@ -1,6 +1,5 @@
 require 'openssl'
 require 'date'
-require 'hashit/prepare'
 
 module Hashit
   module Digests
